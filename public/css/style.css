@@ -1,0 +1,23 @@
+h1 {
+    text-align: center;
+    color: #1A1A2E;
+    font-size: 4rem;
+    font-weight: bold;
+    margin-top: 2rem;
+}
+
+h2 {
+    text-align: center;
+    color: #555;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+    font-size: 3rem;
+}
