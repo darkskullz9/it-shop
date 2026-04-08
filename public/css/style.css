@@ -22,6 +22,10 @@ h2 {
     font-size: 3rem;
 }
 
+li {
+    list-style: none;
+}
+
 a {
     color: #1A1A2E;
     text-decoration: none;
