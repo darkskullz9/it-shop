@@ -21,3 +21,9 @@ h2 {
     text-align: center;
     font-size: 3rem;
 }
+
+a {
+    color: #1A1A2E;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
