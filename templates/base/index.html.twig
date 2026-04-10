@@ -1,12 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}}Home{% endblock %}
+{% block title %}{{ parent() }}Home{% endblock %}
+
 {% block body %}
     <h1>IT Shop</h1>
-    <h2>Everything for it !</h2>
-    <div class="icons">
-        <span class="icon"></span>
-        <span class="icon"></span>
-        <span class="icon"></span>
+
+    <div class="products-container">
+        <ul class="products-grid">
+            {% for produit in produits %}
+                <li class="card">
+                    {% set image = 'images/' ~ produit.image %}
+                    <img 
+                        src="{{ asset(image) }}" 
+                        class="card-thumbnail" 
+                        alt="Image de {{ produit.designation }}"
+                    />
+
+                    <div class="card-text">
+                        <h3 class="product-designation">
+                            {{produit.designation}}
+                        </h3>
+                    </div>
+
+                    <div class="card-footer">{{produit.prix}} €</div>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
+
+    {# <div class="clickable-card">
+        <h2>Carte cliquable</h2>
+
+        <img 
+            src="{{ asset('images/case05-map.jpg') }}"
+            alt="Carte interactive IT Shop"
+            usemap="#itshop-map"
+            class="clickable-card-image" 
+        />
+
+        <map name="itshop-map">
+            <area shape="rect" coords="680,1180,1107,1270" href="https://www.ldlc.com/fiche/PB00656140.html?gad_source=1&gad_campaignid=23500164385&gclid=Cj0KCQjwv-LOBhCdARIsAM5hdKdh_PFt3KRuhlog6m9hId3MTYpvvb58iRPJUuHG3_2-74Ebh4NeiJoaAlvbEALw_wcB" alt="Alimentation Corsair RM750x" title="Aller au produit">
+        </map>
+    </div> #}
 {% endblock %}
