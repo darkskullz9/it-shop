@@ -16,4 +16,10 @@ final class BaseController extends AbstractController {
             'produits' => $produits
         ]);
     }
+
+    #[Route('/login', name: 'app_login')]
+    public function index(): Response {
+        return $this->render('base/index.html.twig', []);
+    }
+
 }
