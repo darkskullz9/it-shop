@@ -24,7 +24,7 @@
 
                     <div class="card-footer">
                         <div class="card-footer-main">
-                            {{produit.prix}} €
+                            <p class="product-price">{{produit.prix}} €</p>
 
                             <a href="{{ path('app_favori', {'id': produit.id}) }}" class="favorite-btn">
                                 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}

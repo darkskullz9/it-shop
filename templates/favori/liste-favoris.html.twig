@@ -3,9 +3,9 @@
 {% block title %}{{ parent() }} My Favorites {% endblock %}
 
 {% block body %}
-<div class="cards-wrapper">
-    <h1>My Favorites</h1>
+<h1>My Favorites</h1>
 
+<div class="cards-wrapper">
     {% if favoris is empty %}
         <h2>You have no favs yet.</h2>
     {% else %}
@@ -13,6 +13,7 @@
             {% for produit in favoris %}
                 <div class="card">
                     {% set image = 'images/' ~ produit.image %}
+
                     <img 
                         src="{{ asset(image) }}" 
                         class="card-thumbnail" 
@@ -27,7 +28,7 @@
 
                     <div class="card-footer">
                         <div class="card-footer-main">
-                            {{produit.prix}} €
+                            <p class="product-price">{{produit.prix}} €</p>
 
                             <a href="{{ path('app_favori', {'id': produit.id}) }}" class="favorite-btn">
                                 <svg 

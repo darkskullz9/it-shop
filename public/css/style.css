@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+* {
+    font-size: 16px;
+}
+
 h1 {
     text-align: center;
     color: #1A1A2E;
@@ -33,9 +37,34 @@ li {
 }
 
 a {
-    color: #1A1A2E;
+    color: inherit;
     text-decoration: none;
     transition: color 0.3s ease;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    padding: 0.7em 1em;
+}
+
+.main-nav .logotype {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    gap: 0.8rem;
+}
+
+.nav-link {
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 .card {
@@ -78,6 +107,24 @@ a {
     flex-direction: column;
 }
 
+.product-designation, .product-price {
+    font-size: 1.4em;
+}
+
+.product-price {
+    font-weight: 500;
+}
+
+.favorite-btn {
+    display: flex;
+}
+
+.card-footer-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+}
 .clickable-card {
     max-width: 1600px;
     margin: 2rem auto;
