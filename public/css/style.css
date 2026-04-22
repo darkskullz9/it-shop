@@ -1,3 +1,9 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 h1 {
     text-align: center;
     color: #1A1A2E;
@@ -35,7 +41,7 @@ a {
 .card {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 100%;
     height: auto;
     gap: 0.5rem;
     padding: 1rem;
@@ -47,18 +53,21 @@ a {
 }
 
 .card-thumbnail {
-    width: 300px;
-    height: auto;
-}
-
-.products-container {
     width: 100%;
-    padding: 1.2rem;
+    height: 300px;
+    object-fit: contain;
 }
 
-.products-grid {
+.cards-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.cards-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
     list-style: none;
     margin: 0;
     padding: 0;
