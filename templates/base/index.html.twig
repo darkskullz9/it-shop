@@ -5,6 +5,8 @@
 {% block body %}
     <h1>IT Shop</h1>
 
+    {{render(controller('App\\Controller\\BaseController::search'))}}
+
     <div class="cards-wrapper">
         <div class="cards-grid">
             {% for produit in produits %}

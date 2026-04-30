@@ -30,6 +30,9 @@ class Produit
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'produits')]
     private Collection $favoris;
 
+    #[ORM\Column(length: 500)]
+    private ?string $description = null;
+
     public function __construct()
     {
         $this->favoris = new ArrayCollection();
@@ -96,6 +99,18 @@ class Produit
     public function removeFavori(User $favori): static
     {
         $this->favoris->removeElement($favori);
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }

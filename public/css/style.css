@@ -67,6 +67,12 @@ a {
     font-weight: 600;
 }
 
+.search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .card {
     display: flex;
     flex-direction: column;
