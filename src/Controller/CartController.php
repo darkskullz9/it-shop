@@ -37,7 +37,7 @@ final class CartController extends AbstractController
         $user = $this->getUser();
 
         $cart = $cartRepository->findOneBy(['user' => $user]);
-        if(!cart) {
+        if(!$cart) {
             $cart = new Cart();
             $cart->setUser($user);
             $em->persist($cart);
@@ -48,7 +48,7 @@ final class CartController extends AbstractController
             $add->setQuantity($add->getQuantity() + 1);
         } else {
             $add = new Add();
-            $add->setCard($cart);
+            $add->setCart($cart);
             $add->setProduct($produit);
             $add->setQuantity(1);
             $em->persist($add);
