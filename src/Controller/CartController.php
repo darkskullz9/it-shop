@@ -58,4 +58,16 @@ final class CartController extends AbstractController
 
         return $this->redirectToRoute('app_cart');
     }
+
+    #[Route('/remove/{id}', name: 'app_cart_remove')]
+    public function remove(Add $add, EntityManagerInterface $em): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $em->remove($add);
+        $em->flush();
+
+        return $this->redirectToRoute('app_cart');
+    }
+
 }
