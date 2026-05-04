@@ -3,4 +3,11 @@
 {% block title %}{{ parent() }}My Cart{% endblock %}
 
 {% block body %}
+<div class="card-wrapper">
+    <h1>My Cart</h1>
+
+    {% if cart is null or cart.adds is empty %}
+        <h2>Your cart is empty.</h2>
+    {% endif %}
+</div>
 {% endblock %}

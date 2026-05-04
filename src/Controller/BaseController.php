@@ -31,7 +31,7 @@ final class BaseController extends AbstractController {
             if($request->get("q")){
                 $word=$request->get("q");
 
-                $produits=$produitRepository->search(word);
+                $produits=$produitRepository->search($word);
             }
         }
         return $this->render('base/results.html.twig', ["produits"=>$produits, "word"=>$word]);
