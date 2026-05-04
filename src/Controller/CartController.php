@@ -70,4 +70,20 @@ final class CartController extends AbstractController
         return $this->redirectToRoute('app_cart');
     }
 
+    #[Route('/empty', name: 'app_cart_clear')]
+    public function empty(CartRepository $cartRepository, EntityManagerInterface $em): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $cart = $cartRepository->findOneBy(['user' => $this->getUser()]);
+        if($cart) {
+            foreach($cart->getAdds() as $add) {
+                $em->remove($add);
+            }
+
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('app_cart');
+    }
 }
