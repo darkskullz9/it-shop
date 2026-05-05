@@ -11,8 +11,20 @@
     {% endif %}
         <table class="cart-table">
             <thead>
-                <tr></tr>
+                <tr>
+                    <th>Product</th>
+                    <th>Unit price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
             </thead>
+
+            <tbody>
+                {% for add in cart.adds %}
+                    
+                {% enfor %}
+            </tbody>
         </table>
 </div>
 {% endblock %}
