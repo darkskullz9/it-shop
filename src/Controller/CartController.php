@@ -55,8 +55,10 @@ final class CartController extends AbstractController
         }
 
         $em->flush();
+        
+        $this->addFlash('cart_added', $produit->getDesignation());
 
-        return $this->redirectToRoute('app_cart');
+        return $this->redirectToRoute('app_home');
     }
 
     #[Route('/remove/{id}', name: 'app_cart_remove')]
