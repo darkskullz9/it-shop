@@ -1,3 +1,4 @@
 {
-    "terminal.integrated.fontFamily": "\"'Fira Code', monospace\""
+    "terminal.integrated.fontFamily": "\"'Fira Code', monospace\"",
+    "postman.settings.dotenv-detection-notification-visibility": false
 }
