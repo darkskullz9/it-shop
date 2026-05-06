@@ -5,14 +5,23 @@
 }
 
 * {
+    font-family: sans-serif;
     font-size: 16px;
 }
 
+@font-face {
+    font-family: 'Neotrax';
+    src: url('../fonts/neotrax-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 h1 {
+    font-family: 'Rajdhani';
     text-align: center;
     color: #1A1A2E;
     font-size: 4rem;
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 2rem;
 }
 
@@ -51,6 +60,7 @@ a {
 }
 
 .main-nav .logotype {
+    font-family: 'Neotrax';
     font-size: 2rem;
     font-weight: 700;
 }
@@ -63,6 +73,7 @@ a {
 }
 
 .nav-link {
+    font-family: 'Rajdhani';
     font-size: 1.2rem;
     font-weight: 600;
 }
@@ -114,6 +125,7 @@ a {
 }
 
 .product-designation, .product-price {
+    font-family: 'Rajdhani';
     font-size: 1.4em;
 }
 
@@ -202,6 +214,7 @@ a {
 }
 
 .btn-view-cart {
+    font-family: 'Rajdhani';
     background: #1A1A2E;
     color: white;
     padding: 0.75rem;
@@ -211,6 +224,7 @@ a {
 }
 
 .btn-continue {
+    font-family: 'Rajdhani';
     background: transparent;
     border: 1px solid #1A1A2E;
     color: #1A1A2E;

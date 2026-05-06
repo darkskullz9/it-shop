@@ -19,13 +19,19 @@ class ProduitRepository extends ServiceEntityRepository
        /**
         * @return Produit[] Returns an array of Produit objects
         */
-       public function search($value): array
+       public function search(string $word): array
        {
             $qb=$this->createQueryBuilder('p');
-               $qb->andWhere($qb->expr()->like('p.description', ':val'))
-               ->setParameter('val', '%'.$value.'%')
-               ->orderBy('p.designation', 'ASC')
-           ; 
+            $qb->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like('p.designation', ':val'),
+                    $qb->expr()->like('p.description', ':val')
+                )
+            )
+
+            ->setParameter('val', '%'.$word.'%')
+            ->orderBy('p.designation', 'ASC');
+            
            return $qb->getQuery()->getResult();
        }
 
