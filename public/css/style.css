@@ -220,6 +220,19 @@ a {
     font-weight: bold;
 }
 
+.product-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: auto;
+}
+
+.product-details .product-image img {
+    width: 100%;
+    height: 800px;
+    object-fit: contain;
+}
+
 .clickable-card {
     max-width: 1600px;
     margin: 2rem auto;

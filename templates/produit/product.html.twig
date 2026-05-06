@@ -3,10 +3,10 @@
 {% block title %}{{ parent() }} {{ produit.designation }}{% endblock %}
 
 {% block body %}
-<div class="product-wrapper">
+<div class="main-container product-wrapper">
     <a href="{{ path('app_home') }}" class="back-btn">Back</a>
 
-    <div class="product-detail">
+    <div class="product-details">
         <div class="product-image">
             {% set image = 'images/' ~ produit.image %}
 
@@ -16,13 +16,14 @@
             />
         </div>
 
-        <div class="product-info">
+        <div class="product-infos">
             <h1>{{ produit.designation }}</h1>
-            <p class="product-price">{{ produit.prix }} €</p>
 
             {% if produit.description %}
                 <p class="product-description">{{ produit.description }}</p>
             {% endif %}
+
+            <p class="product-price">{{ produit.prix }} €</p>
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a href="{{ path('app_favori', {id: produit.id}) }}" class="favorite-btn">

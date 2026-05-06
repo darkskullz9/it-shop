@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -29,7 +30,7 @@ final class CartController extends AbstractController
     }
 
     #[Route('/add/{id}', name: 'app_cart_add')]
-    public function add(int $id, ProduitRepository $produitRepository, CartRepository $cartRepository, AddRepository $addRepository, EntityManagerInterface $em): Response
+    public function add(int $id, Request $request, ProduitRepository $produitRepository, CartRepository $cartRepository, AddRepository $addRepository, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -55,8 +56,12 @@ final class CartController extends AbstractController
         }
 
         $em->flush();
-        
         $this->addFlash('cart_added', $produit->getDesignation());
+
+        $referer = $request->headers->get('referer');
+        if($referer) {
+            return $this->redirect($referer);
+        }
 
         return $this->redirectToRoute('app_home');
     }
