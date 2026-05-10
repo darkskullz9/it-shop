@@ -5,14 +5,23 @@
 }
 
 * {
+    font-family: sans-serif;
     font-size: 16px;
 }
 
+@font-face {
+    font-family: 'Neotrax';
+    src: url('../fonts/neotrax-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 h1 {
+    font-family: 'Rajdhani';
     text-align: center;
     color: #1A1A2E;
     font-size: 4rem;
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 2rem;
 }
 
@@ -40,6 +49,7 @@ a {
     color: inherit;
     text-decoration: none;
     transition: color 0.3s ease;
+    height: fit-content;
 }
 
 .main-nav {
@@ -51,6 +61,7 @@ a {
 }
 
 .main-nav .logotype {
+    font-family: 'Neotrax';
     font-size: 2rem;
     font-weight: 700;
 }
@@ -63,8 +74,15 @@ a {
 }
 
 .nav-link {
+    font-family: 'Rajdhani';
     font-size: 1.2rem;
     font-weight: 600;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .card {
@@ -83,7 +101,7 @@ a {
 
 .card-thumbnail {
     width: 100%;
-    height: 300px;
+    height: 260px;
     object-fit: contain;
 }
 
@@ -108,6 +126,7 @@ a {
 }
 
 .product-designation, .product-price {
+    font-family: 'Rajdhani';
     font-size: 1.4em;
 }
 
@@ -123,8 +142,113 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: auto;
 }
+
+.card-footer-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+/*Notification toast*/
+.cart-toast {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: #1A1A2E;
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: slideIn 0.3s ease forwards, fadeOut 0.4s ease 2s forwards;
+}
+
+@keyframes slideIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+/*Modal overlay*/
+.cart-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    opacity: 0;
+    animation: fadeIn 0.3s ease 2.2s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/*Modal*/
+.cart-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    max-width: 380px;
+    width: 90%;
+}
+
+.cart-modal h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: #1A1A2E;
+}
+
+.cart-modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.btn-view-cart {
+    font-family: 'Rajdhani';
+    background: #1A1A2E;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-continue {
+    font-family: 'Rajdhani';
+    background: transparent;
+    border: 1px solid #1A1A2E;
+    color: #1A1A2E;
+    padding: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: auto;
+}
+
+.product-details .product-image img {
+    width: 100%;
+    height: 800px;
+    object-fit: contain;
+}
+
 .clickable-card {
     max-width: 1600px;
     margin: 2rem auto;

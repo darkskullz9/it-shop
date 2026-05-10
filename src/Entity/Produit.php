@@ -21,7 +21,7 @@ class Produit
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'decimal', precision: 8, scale: 2)]
     private ?float $prix = null;
 
     /**
@@ -30,9 +30,19 @@ class Produit
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'produits')]
     private Collection $favoris;
 
+    #[ORM\Column(length: 500)]
+    private ?string $description = null;
+
+    /**
+     * @var Collection<int, Add>
+     */
+    #[ORM\OneToMany(targetEntity: Add::class, mappedBy: 'product', orphanRemoval: true)]
+    private Collection $adds;
+
     public function __construct()
     {
         $this->favoris = new ArrayCollection();
+        $this->adds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,6 +106,48 @@ class Produit
     public function removeFavori(User $favori): static
     {
         $this->favoris->removeElement($favori);
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Add>
+     */
+    public function getAdds(): Collection
+    {
+        return $this->adds;
+    }
+
+    public function addAdd(Add $add): static
+    {
+        if (!$this->adds->contains($add)) {
+            $this->adds->add($add);
+            $add->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdd(Add $add): static
+    {
+        if ($this->adds->removeElement($add)) {
+            // set the owning side to null (unless already changed)
+            if ($add->getProduct() === $this) {
+                $add->setProduct(null);
+            }
+        }
 
         return $this;
     }

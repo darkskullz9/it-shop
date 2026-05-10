@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}My Cart{% endblock %}
+
+{% block body %}
+<div class="main-container card-wrapper">
+    <h1>My Cart</h1>
+
+    {% if cart is null or cart.adds is empty %}
+        <h2>Your cart is empty</h2>
+    {% endif %}
+
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Unit price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for add in cart.adds %}
+                <tr>
+                    <td>{{ add.product.designation }}</td>
+                    <td>{{ add.product.prix }} €</td>
+                    <td>{{ add.quantity }}</td>
+                    <td>{{ (add.quantity * add.product.prix) | number_format(2, ',', ' ')}} €</td>
+                    <td>
+                        <a href="{{ path('app_cart_remove', {id: add.id}) }}" class="remove-btn">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24" 
+                                height="24" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                stroke-width="2"
+                            >
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                                <path d="M10 11v6"/>
+                                <path d="M14 11v6"/>
+                                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% for add in cart.adds %}
+        <a href="{{ path('app_cart_clear') }}">
+            Empty the cart
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}
