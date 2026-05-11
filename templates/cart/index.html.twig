@@ -52,10 +52,15 @@
         </tbody>
     </table>
 
+    {% set total = 0 %}
     {% for add in cart.adds %}
-        <a href="{{ path('app_cart_clear') }}">
-            Empty the cart
-        </a>
+        {% set total = total + (add.quantity * add.product.prix) %}
     {% endfor %}
+
+    {% if cart is not null and cart.adds is not empty %}
+        <p>Total : {{ total|number_format(2, ',', ' ') }} €</p>
+        <a href="{{ path('app_cart_clear') }}">Empty the cart</a>
+        <a href="{{ path('app_order_create') }}">Place order</a>
+    {% endif %}
 </div>
 {% endblock %}
