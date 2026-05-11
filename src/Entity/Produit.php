@@ -45,6 +45,9 @@ class Produit
     #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'produit')]
     private Collection $orderItems;
 
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    private ?Category $category = null;
+
     public function __construct()
     {
         $this->favoris = new ArrayCollection();
@@ -185,6 +188,18 @@ class Produit
                 $orderItem->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
