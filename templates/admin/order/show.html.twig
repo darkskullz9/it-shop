@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Order #{{ order.id }}{% endblock %}
+
+{% block body %}
+<div class="admin-container">
+    <aside class="admin-sidebar">
+        <h2 class="admin-sidebar-title">Admin Panel</h2>
+
+        <nav>
+            <ul class="admin-nav">
+                <li><a href="{{ path('app_admin') }}" class="admin-nav-link">Dashboard</a></li>
+                <li><a href="{{ path('app_admin_produits') }}" class="admin-nav-link active">Products</a></li>
+                <li><a href="{{ path('app_admin_categories') }}" class="admin-nav-link">Categories</a></li>
+                <li><a href="{{ path('app_admin_orders') }}" class="admin-nav-link">Orders</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+        <div class="admin-main-header">
+            <h1>Order #{{ order.id }}</h1>
+            <a href="{{ path('app_admin_orders') }}" class="admin-btn admin-btn-secondary">← Back</a>
+        </div>
+
+        {% for message in app.flashes('success') %}
+            <div class="flash flash-success">{{ message }}</div>
+        {% endfor %}
+
+        <div class="admin-order-info">
+            <p><strong>Customer :</strong> {{ order.user ? order.user.email : '—' }}</p>
+            <p><strong>Date :</strong> {{ order.dateOrder ? order.dateOrder|date('d/m/Y H:i') : '—' }}</p>
+
+            <p><strong>Status :</strong>
+                <span class="admin-status admin-status-{{ order.status|lower|replace({' ': '-'}) }}">
+                    {{ order.status ?? 'Pending' }}
+                </span>
+            </p>
+        </div>
+
+        <table class="admin-table" style="margin-top: 1.5rem;">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Unit price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set total = 0 %}
+                {% for item in order.orderItems %}
+                <tr>
+                    <td>{{ item.produit.designation }}</td>
+                    <td>{{ item.produit.prix }} €</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ (item.quantity * item.produit.prix)|number_format(2, ',', ' ') }} €</td>
+                </tr>
+                {% set total = total + (item.quantity * item.produit.prix) %}
+                {% endfor %}
+                <tr class="admin-table-total">
+                    <td colspan="3"><strong>Total</strong></td>
+                    <td><strong>{{ total|number_format(2, ',', ' ') }} €</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form action="{{ path('app_admin_order_show', { id: order.id }) }}" method="POST" class="admin-status-form">
+            <label for="status"><strong>Change status :</strong></label>
+
+            <select name="status" id="status">
+                <option value="Pending"    {{ order.status == 'Pending'    ? 'selected' }}>Pending</option>
+                <option value="Processing" {{ order.status == 'Processing' ? 'selected' }}>Processing</option>
+                <option value="Shipped"    {{ order.status == 'Shipped'    ? 'selected' }}>Shipped</option>
+                <option value="Delivered"  {{ order.status == 'Delivered'  ? 'selected' }}>Delivered</option>
+                <option value="Cancelled"  {{ order.status == 'Cancelled'  ? 'selected' }}>Cancelled</option>
+            </select>
+
+            <button type="submit" class="admin-btn">Update status</button>
+        </form>
+    </main>
+</div>
+{% endblock %}

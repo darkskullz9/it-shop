@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{{ title }}{% endblock %}
+
+{% block body %}
+<div class="admin-container">
+    <aside class="admin-sidebar">
+        <h2 class="admin-sidebar-title">Admin Panel</h2>
+
+        <nav>
+            <ul class="admin-nav">
+                <li><a href="{{ path('app_admin') }}" class="admin-nav-link">Dashboard</a></li>
+                <li><a href="{{ path('app_admin_produits') }}" class="admin-nav-link">Products</a></li>
+                <li><a href="{{ path('app_admin_categories') }}" class="admin-nav-link active">Categories</a></li>
+                <li><a href="{{ path('app_admin_orders') }}" class="admin-nav-link">Orders</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+        <div class="admin-main-header">
+            <h1>{{ title }}</h1>
+            <a href="{{ path('app_admin_categories') }}" class="admin-btn admin-btn-secondary">← Back</a>
+        </div>
+
+        {{ form_start(form, { attr: { class: 'admin-form' } }) }}
+            {{ form_row(form.designation) }}
+            <button type="submit" class="admin-btn">Save</button>
+        {{ form_end(form) }}
+    </main>
+</div>
+{% endblock %}
