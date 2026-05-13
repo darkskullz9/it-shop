@@ -3,7 +3,7 @@
 {% block title %}{{ parent() }}My Cart{% endblock %}
 
 {% block body %}
-<div class="main-container card-wrapper">
+<div class="main-container">
     <h1>My Cart</h1>
 
     {% if cart is null or cart.adds is empty %}
@@ -18,7 +18,6 @@
                     <th>Unit price</th>
                     <th>Quantity</th>
                     <th>Subtotal</th>
-                    <th></th>
                 </tr>
             </thead>
 
@@ -55,8 +54,16 @@
         </table>
 
         <p>Total : {{ total|number_format(2, ',', ' ') }} €</p>
-        <a href="{{ path('app_cart_clear') }}">Empty the cart</a>
-        <a href="{{ path('app_order_create') }}">Place order</a>
+        
+        <div class="cart-btn-container">
+            <button class="action-btn">
+                <a href="{{ path('app_cart_clear') }}">Empty the cart</a>
+            </button>
+
+            <button class="action-btn">
+                <a href="{{ path('app_order_create') }}">Place order</a>
+            </button>
+        </div>
     {% endif %}
 </div>
 {% endblock %}
