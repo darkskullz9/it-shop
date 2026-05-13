@@ -12,7 +12,7 @@
         <div class="cards-grid">
             {% for produit in favoris %}
                 <div class="card">
-                    {% set image = 'images/' ~ produit.image %}
+                    {% set image = 'uploads/' ~ produit.image %}
 
                     <img 
                         src="{{ asset(image) }}" 

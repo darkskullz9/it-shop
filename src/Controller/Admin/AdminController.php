@@ -40,6 +40,19 @@ final class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('imageFile')->getData();
+
+            if($imageFile) {
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+
+                $imageFile->move(
+                    $this->getParameter('kernel.project_dir') . '/public/uploads/',
+                    $newFilename
+                );
+
+                $produit->setImage($newFilename);
+            }
+
             $em->persist($produit);
             $em->flush();
             $this->addFlash('success', 'Product created.');
@@ -49,6 +62,49 @@ final class AdminController extends AbstractController
         return $this->render('admin/produit/form.html.twig', [
             'form' => $form,
             'title' => 'New product'
+        ]);
+    }
+
+    #[Route('/produits/{id}/edit', name: 'app_admin_produit_edit')]
+    public function produitEdit(Produit $produit, Request $request, EntityManagerInterface $em): Response
+    {
+        $oldImage = $produit->getImage();
+
+        $form = $this->createForm(ProduitType::class, $produit);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('imageFile')->getData();
+
+            if($imageFile) {
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+
+                $imageFile->move(
+                    $this->getParameter('kernel.project_dir') . '/public/uploads/',
+                    $newFilename
+                );
+
+                if($oldImage) {
+                    $oldImagePath = $this->getParameter('kernel.project_dir') . '/public/uploads/' . $oldImage;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                $produit->setImage($newFilename);
+            } else {
+                $produit->setImage($oldImage);
+            }
+
+            $em->flush();
+            $this->addFlash('success', 'Product updated.');
+            return $this->redirectToRoute('app_admin_produits');
+        }
+
+        return $this->render('admin/produit/form.html.twig', [
+            'form' => $form,
+            'title' => 'Edit product',
+            'produit' => $produit,
         ]);
     }
 
@@ -111,7 +167,7 @@ final class AdminController extends AbstractController
         return $this->redirectToRoute('app_admin_categories');
     }
 
-    #[Route('/orders', name: 'app_admin_oerders')]
+    #[Route('/orders', name: 'app_admin_orders')]
     public function orders(OrderRepository $orderRepository): Response {
         return $this->render('admin/order/index.html.twig', [
             'orders' => $orderRepository->findBy([], ['dateOrder' => 'DESC']),
