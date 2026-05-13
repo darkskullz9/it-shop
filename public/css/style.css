@@ -85,6 +85,37 @@ a {
     justify-content: center;
 }
 
+.main-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 24rem;
+}
+
+table {
+    text-align: center;
+    border-collapse: collapse;
+}
+
+th {
+    border: 1px black solid;
+}
+
+tbody td{
+    border: 1px black solid;
+}
+
+.cart-btn-container {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.cart-btn-container .action-btn {
+    display:flex;
+    padding: 0.25em;
+}
+
+
 .card {
     display: flex;
     flex-direction: column;
