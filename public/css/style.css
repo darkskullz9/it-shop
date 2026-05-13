@@ -4,9 +4,32 @@
     padding: 0;
 }
 
-* {
-    font-family: sans-serif;
-    font-size: 16px;
+:root {
+    --color-bg:          #0D0D1A;
+    --color-surface:     #14142B;
+    --color-surface-2:   #1C1C38;
+    --color-border:      #2A2A50;
+    --color-primary:     #1A1A2E;
+    --color-accent:      #00D4FF;
+    --color-accent-dim:  rgba(0, 212, 255, 0.12);
+    --color-text:        #E8E8F0;
+    --color-text-muted:  #7878A0;
+    --color-white:       #FFFFFF;
+    --color-danger:      #FF4D6D;
+    --color-success:     #00D68F;
+ 
+    --radius-sm:  6px;
+    --radius-md:  10px;
+    --radius-lg:  16px;
+ 
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 20px rgba(0, 212, 255, 0.15);
+ 
+    --transition: 0.25s ease;
+ 
+    --font-display: 'Rajdhani', sans-serif;
+    --font-body:    sans-serif;
+    --font-brand:   'Neotrax', sans-serif;
 }
 
 @font-face {
@@ -14,6 +37,24 @@
     src: url('../fonts/neotrax-regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
+}
+
+* {
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
 }
 
 h1 {
