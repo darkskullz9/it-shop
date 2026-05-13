@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{{ title }}{% endblock %}
+
+{% block body %}
+<div class="admin-container">
+    <aside class="admin-sidebar">
+        <h2 class="admin-sidebar-title">Admin Panel</h2>
+
+        <nav>
+            <ul class="admin-nav">
+                <li><a href="{{ path('app_admin') }}" class="admin-nav-link">Dashboard</a></li>
+                <li><a href="{{ path('app_admin_produits') }}" class="admin-nav-link active">Products</a></li>
+                <li><a href="{{ path('app_admin_categories') }}" class="admin-nav-link">Categories</a></li>
+                <li><a href="{{ path('app_admin_orders') }}" class="admin-nav-link">Orders</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+        <div class="admin-main-header">
+            <h1>{{ title }}</h1>
+            <a href="{{ path('app_admin_produits') }}" class="admin-btn admin-btn-secondary">← Back</a>
+        </div>
+
+        {{ form_start(form, { attr: { class: 'admin-form', novalidate: 'novalidate' } }) }}
+
+            {{ form_row(form.designation) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.prix) }}
+            {{ form_row(form.category) }}
+
+            {% if produit is defined and produit.image %}
+                <div class="admin-current-image">
+                    <label>Current image</label>
+                    <img 
+                        src="{{ asset('uploads/' ~ produit.image) }}" 
+                        alt="{{ produit.designation }}"
+                    >
+                    <small>Leave empty to keep this image</small>
+                </div>
+            {% endif %}
+
+            {{ form_row(form.imageFile) }}
+
+            <button type="submit" class="admin-btn">Save</button>
+
+        {{ form_end(form) }}
+    </main>
+</div>
+{% endblock %}

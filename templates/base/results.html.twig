@@ -1,34 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}Home{% endblock %}
+{% block title %}{{ parent() }} Results for "{{ word }}"{% endblock %}
 
 {% block body %}
-    <h1>IT Shop</h1>
+<div class="cards-wrapper">
+    <h1>Results for "{{ word }}"</h1>
 
-    {{render(controller('App\\Controller\\BaseController::search'))}}
-
-    <div class="main-container cards-wrapper">
+    {% if produits is empty %}
+        <h2>No results found for "{{ word }}"</h2>
+    {% else %}
         <div class="cards-grid">
             {% for produit in produits %}
                 <div class="card">
-                    {% set image = 'uploads/' ~ produit.image %}
+                    {% set image = 'images/' ~ produit.image %}
                     <a href="{{ path('app_produit', {id: produit.id}) }}">
                         <img 
                             src="{{ asset(image) }}" 
                             class="card-thumbnail" 
-                            alt="Image de {{ produit.designation }}"
+                            alt="{{ produit.designation }}"
                         />
                     </a>
 
                     <div class="card-text">
-                        <h3 class="product-designation">
-                            {{produit.designation}}
-                        </h3>
+                        <h3 class="product-designation">{{ produit.designation }}</h3>
                     </div>
 
                     <div class="card-footer">
                         <div class="card-footer-main">
-                            <p class="product-price">{{produit.prix}} €</p>
+                            <p class="product-price">{{ produit.prix }} €</p>
 
                             <div class="card-footer-icons">
                                 <a href="{{ path('app_favori', {'id': produit.id}) }}" class="favorite-btn">
@@ -93,20 +92,6 @@
                 </div>
             {% endfor %}
         </div>
-    </div>
-
-    {# <div class="clickable-card">
-        <h2>Carte cliquable</h2>
-
-        <img 
-            src="{{ asset('images/case05-map.jpg') }}"
-            alt="Carte interactive IT Shop"
-            usemap="#itshop-map"
-            class="clickable-card-image" 
-        />
-
-        <map name="itshop-map">
-            <area shape="rect" coords="680,1180,1107,1270" href="https://www.ldlc.com/fiche/PB00656140.html?gad_source=1&gad_campaignid=23500164385&gclid=Cj0KCQjwv-LOBhCdARIsAM5hdKdh_PFt3KRuhlog6m9hId3MTYpvvb58iRPJUuHG3_2-74Ebh4NeiJoaAlvbEALw_wcB" alt="Alimentation Corsair RM750x" title="Aller au produit">
-        </map>
-    </div> #}
+    {% endif %}
+</div>
 {% endblock %}

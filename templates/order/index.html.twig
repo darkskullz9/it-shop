@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} My Orders{% endblock %}
+
+{% block body %}
+<div class="main-container">
+    <h1>My Orders</h1>
+
+    {% if orders is empty %}
+        <h2>You have no orders yet</h2>
+    {% else %}
+        <table class="order-tabble">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.dateOrder|date('d/m/Y H:i') }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>
+                        <a href="{{ path('app_order_show', {id: order.id}) }}">
+                            View details
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}

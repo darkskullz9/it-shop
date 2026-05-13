@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} My Orders{% endblock %}
+
+{% block body %}
+<div class="main-container">
+    <h1>Order #{{order.id}}</h1>
+    <p>{{ order.dateOrder|date('d/m/Y H:i') }}</p>
+    <p>{{ order.status }}</p>
+
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Unit price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% set total = 0 %}
+            {% for item in order.orderItems %}
+            <tr>
+                <td>{{ item.produit.designation }}</td>
+                <td>{{ item.produit.prix }} €</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ (item.quantity * item.produit.prix)|number_format(2, ',', ' ') }} €</td>
+            </tr>
+            {% set total = total + (item.quantity * item.produit.prix) %}
+            {% endfor %}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3">Total</td>
+                <td>{{ total|number_format(2, ',', ' ') }} €</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <a href="{{ path('app_order_index') }}">Back to my orders</a>
+</div>
+{% endblock %}
