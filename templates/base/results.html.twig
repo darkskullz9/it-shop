@@ -12,7 +12,7 @@
         <div class="cards-grid">
             {% for produit in produits %}
                 <div class="card">
-                    {% set image = 'images/' ~ produit.image %}
+                    {% set image = 'uploads/' ~ produit.image %}
                     <a href="{{ path('app_produit', {id: produit.id}) }}">
                         <img 
                             src="{{ asset(image) }}" 

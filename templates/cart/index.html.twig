@@ -8,21 +8,22 @@
 
     {% if cart is null or cart.adds is empty %}
         <h2>Your cart is empty</h2>
-    {% endif %}
+    {% else %}
+        {% set total = 0 %}
+        
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Unit price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
 
-    <table class="cart-table">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Unit price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-                <th></th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for add in cart.adds %}
+            <tbody>
+                {% for add in cart.adds %}
                 <tr>
                     <td>{{ add.product.designation }}</td>
                     <td>{{ add.product.prix }} €</td>
@@ -48,16 +49,11 @@
                         </a>
                     </td>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                {% set total = total + (add.quantity * add.product.prix) %}
+                {% endfor %}
+            </tbody>
+        </table>
 
-    {% set total = 0 %}
-    {% for add in cart.adds %}
-        {% set total = total + (add.quantity * add.product.prix) %}
-    {% endfor %}
-
-    {% if cart is not null and cart.adds is not empty %}
         <p>Total : {{ total|number_format(2, ',', ' ') }} €</p>
         <a href="{{ path('app_cart_clear') }}">Empty the cart</a>
         <a href="{{ path('app_order_create') }}">Place order</a>
