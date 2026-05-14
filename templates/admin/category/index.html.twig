@@ -1,64 +1,47 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}{{ parent() }}Categories{% endblock %}
 
-{% block body %}
-<div class="admin-container">
-    <aside class="admin-sidebar">
-        <h2 class="admin-sidebar-title">Admin Panel</h2>
+{% block admin_content %}
+    <div class="admin-main-header">
+        <h1>Categories</h1>
+        <a href="{{ path('app_admin_category_new') }}" class="admin-btn">+ New category</a>
+    </div>
 
-        <nav>
-            <ul class="admin-nav">
-                <li><a href="{{ path('app_admin') }}" class="admin-nav-link">Dashboard</a></li>
-                <li><a href="{{ path('app_admin_produits') }}" class="admin-nav-link">Products</a></li>
-                <li><a href="{{ path('app_admin_categories') }}" class="admin-nav-link active">Categories</a></li>
-                <li><a href="{{ path('app_admin_orders') }}" class="admin-nav-link">Orders</a></li>
-            </ul>
-        </nav>
-    </aside>
+    {% for message in app.flashes('success') %}
+        <div class="flash flash-success">{{ message }}</div>
+    {% endfor %}
 
-    <main class="admin-main">
-        <div class="admin-main-header">
-            <h1>Categories</h1>
-            <a href="{{ path('app_admin_category_new') }}" class="admin-btn">+ New category</a>
-        </div>
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Products</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.designation }}</td>
+                <td>{{ category.produits|length }}</td>
+                <td class="admin-actions">
+                    <a href="{{ path('app_admin_category_edit', { id: category.id }) }}" class="admin-btn admin-btn-secondary">Edit</a>
 
-        {% for message in app.flashes('success') %}
-            <div class="flash flash-success">{{ message }}</div>
-        {% endfor %}
-
-        <table class="admin-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Products</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for category in categories %}
-                <tr>
-                    <td>{{ category.designation }}</td>
-                    <td>{{ category.produits|length }}</td>
-                    <td class="admin-actions">
-                        <a href="{{ path('app_admin_category_edit', { id: category.id }) }}" class="admin-btn admin-btn-secondary">Edit</a>
-
-                        <form 
-                            action="{{ path('app_admin_category_delete', { id: category.id }) }}" 
-                            method="POST"
-                            onsubmit="return confirm('Delete this category?')"
-                        >
-                            <button type="submit" class="admin-btn admin-btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="3" class="admin-empty">No categories yet.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </main>
-</div>
+                    <form 
+                        action="{{ path('app_admin_category_delete', { id: category.id }) }}" 
+                        method="POST"
+                        onsubmit="return confirm('Delete this category?')"
+                    >
+                        <button type="submit" class="admin-btn admin-btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3" class="admin-empty">No categories yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
