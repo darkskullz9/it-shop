@@ -56,7 +56,9 @@
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <div class="quantity-cart">
                     <div class="quantity-selector">
+                        <button type="button" id="qty-minus" class="qty-btn" aria-label="Decrease quantity">−</button>
                         <input type="number" id="quantity" value="1" min="1" max="99"/>
+                        <button type="button" id="qty-plus" class="qty-btn" aria-label="Increase quantity">+</button>
                     </div>
 
                     <a href="{{ path('app_cart_add', {id: produit.id}) }}" id="add-to-cart-btn" class="btn-add-to-cart" data-base-url="{{ path('app_cart_add', {id: produit.id}) }}">
