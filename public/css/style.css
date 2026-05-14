@@ -1457,7 +1457,7 @@ h2.auth-title {
 
 .admin-form-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: var(--space-md);
 }
 
@@ -1656,7 +1656,6 @@ h2.auth-title {
     }
 
     .cart-modal {
-        border-radius: var(--radius-lg);
         max-width: 380px;
         width: 90%;
     }
@@ -1666,9 +1665,9 @@ h2.auth-title {
     }
 }
 
-@media (max-width: 600px) {
+@media (min-width: 600px) {
     .admin-form-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 }
 
