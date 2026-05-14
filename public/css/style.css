@@ -1748,10 +1748,6 @@ h2.auth-title {
         width: 100%;
     }
 
-    table {
-        min-width: unset;
-    }
-
     th {
         padding: 0.9rem var(--space-md);
         font-size: 0.85rem;
