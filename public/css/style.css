@@ -106,7 +106,7 @@ h1 {
     font-weight: 700;
     color: var(--color-white);
     text-align: center;
-    margin: var(--space-lg) 0 0;
+    margin: var(--space-lg) 0 var(--space-lg);
     letter-spacing: 0.02em;
     position: relative;
     display: inline-block;
@@ -251,7 +251,7 @@ h3 {
 .search-container {
     display: flex;
     justify-content: center;
-    padding: var(--space-lg) var(--space-md);
+    padding: 0 var(--space-md);
 }
 
 .search-container form {
