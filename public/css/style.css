@@ -37,6 +37,8 @@
     --font-display: 'Rajdhani', sans-serif;
     --font-body:    sans-serif;
     --font-brand:   'Neotrax', sans-serif;
+
+    --nav-height: 60px;
 }
 
 @font-face {
@@ -346,11 +348,6 @@ h3 {
         margin: 0 auto;
         padding: var(--space-xl) var(--space-xl) var(--space-2xl);
     }
-}
-
-.cards-wrapper {
-    width: 100%;
-    padding: var(--space-lg) var(--space-md) var(--space-2xl);
 }
  
 @media (min-width: 768px) {
@@ -1240,8 +1237,8 @@ h2.auth-title {
         border-right: 1px solid var(--color-border);
         padding: var(--space-xl) var(--space-md);
         position: sticky;
-        top: 60px; /* colle sous la nav principale */
-        height: calc(100vh - 60px);
+        top: var(--nav-height);
+        height: calc(100vh - var(--nav-height));
         overflow-y: auto;
     }
 }
@@ -1828,7 +1825,20 @@ h2.auth-title {
     padding-left: 2rem;
 }
 
-.clickable-card {
+.nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/*.clickable-card {
     max-width: 1600px;
     margin: 2rem auto;
 }
@@ -1837,4 +1847,4 @@ h2.auth-title {
     display: block;
     width: 100%;
     height: auto;
-}
+}*/

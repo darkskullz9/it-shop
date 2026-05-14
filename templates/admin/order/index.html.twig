@@ -27,9 +27,8 @@
             <tr>
                 <td>#{{ order.id }}</td>
                 <td>{{ order.user ? order.user.email : '—' }}</td>
-                <td>{{ order.dateOrder ? order.dateOrder|date('d/m/Y H:i') : '—' }}</td>
+                <td>{{ order.dateOrder ? order.dateOrder|date('d/m/Y H:i', 'Europe/Paris') : '—' }}</td>
                 <td>
-                    {# Calcule le total de la commande à partir de ses OrderItems #}
                     {% set total = 0 %}
                     {% for item in order.orderItems %}
                         {% set total = total + (item.quantity * item.produit.prix) %}

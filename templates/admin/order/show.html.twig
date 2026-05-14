@@ -14,7 +14,7 @@
 
     <div class="admin-order-info">
         <p><strong>Customer :</strong> {{ order.user ? order.user.email : '—' }}</p>
-        <p><strong>Date :</strong> {{ order.dateOrder ? order.dateOrder|date('d/m/Y H:i') : '—' }}</p>
+        <p><strong>Date :</strong> {{ order.dateOrder ? order.dateOrder|date('d/m/Y H:i', 'Europe/Paris') : '—' }}</p>
 
         <p><strong>Status :</strong>
             <span class="admin-status admin-status-{{ order.status|lower|replace({' ': '-'}) }}">

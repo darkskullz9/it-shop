@@ -59,7 +59,7 @@
                         <input type="number" id="quantity" value="1" min="1" max="99"/>
                     </div>
 
-                    <a href="{{ path('app_cart_add', {id: produit.id}) }}" id="add-to-cart-btn" class="btn-add-to-cart">
+                    <a href="{{ path('app_cart_add', {id: produit.id}) }}" id="add-to-cart-btn" class="btn-add-to-cart" data-base-url="{{ path('app_cart_add', {id: produit.id}) }}">
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
                             width="20" 
