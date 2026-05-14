@@ -38,13 +38,16 @@
                 <td>
                     {# Badge coloré selon le statut #}
                     <span class="admin-status admin-status-{{ order.status|lower|replace({' ': '-'}) }}">
-                        {{ order.status ?? 'Pending' }}
+                        {{ order.status ? order.status|upper : 'PENDING' }}
                     </span>
                 </td>
+
                 <td>
-                    <a href="{{ path('app_admin_order_show', { id: order.id }) }}" class="admin-btn admin-btn-secondary">
-                        View
-                    </a>
+                    <div class="admin-actions">
+                        <a href="{{ path('app_admin_order_show', { id: order.id }) }}" class="admin-btn admin-btn-secondary">
+                            View
+                        </a>
+                    </div>
                 </td>
             </tr>
             {% else %}

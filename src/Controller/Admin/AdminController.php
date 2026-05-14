@@ -36,7 +36,10 @@ final class AdminController extends AbstractController
     #[Route('/produits/new', name: 'app_admin_produit_new')]
     public function produitNew(Request $request, EntityManagerInterface $em): Response {
         $produit = new Produit();
-        $form = $this->createForm(ProduitType::class, $produit);
+        $form = $this->createForm(ProduitType::class, $produit, [
+            'validation_groups' => ['Default', 'creation'],
+        ]);
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -70,7 +73,10 @@ final class AdminController extends AbstractController
     {
         $oldImage = $produit->getImage();
 
-        $form = $this->createForm(ProduitType::class, $produit);
+        $form = $this->createForm(ProduitType::class, $produit, [
+            'validation_groups' => ['Default'],
+        ]);
+        
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {

@@ -18,10 +18,6 @@
     --color-danger:      #FF4D6D;
     --color-success:     #00D68F;
  
-    --radius-sm:  6px;
-    --radius-md:  10px;
-    --radius-lg:  16px;
-
     --space-xs:  0.25rem;  /*  4px */
     --space-sm:  0.5rem;   /*  8px */
     --space-md:  1rem;     /* 16px */
@@ -83,7 +79,7 @@ h1 {
     font-weight: 700;
     color: var(--color-white);
     text-align: center;
-    margin: var(--space-xl) 0 var(--space-lg);
+    margin: var(--space-lg) 0 0;
     letter-spacing: 0.02em;
     position: relative;
     display: inline-block;
@@ -100,7 +96,6 @@ h1::after {
     width: 48px;
     height: 3px;
     background: var(--color-accent);
-    border-radius: 2px;
 }
 
 @media (min-width: 768px) {
@@ -197,7 +192,6 @@ h3 {
     width: 24px;
     height: 2px;
     background: var(--color-accent);
-    border-radius: 2px;
     transition: transform var(--transition), opacity var(--transition);
 }
  
@@ -244,7 +238,6 @@ h3 {
     font-weight: 600;
     color: var(--color-text-muted);
     padding: 0.6rem var(--space-sm);
-    border-radius: var(--radius-sm);
     letter-spacing: 0.03em;
     text-transform: uppercase;
     transition: color var(--transition), background var(--transition);
@@ -272,14 +265,13 @@ h3 {
 .search-container {
     display: flex;
     justify-content: center;
-    padding: var(--space-lg) var(--space-md) var(--space-xs);
+    padding: var(--space-lg) 0;
 }
  
 .search-container form {
     display: flex;
     width: 100%;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
     overflow: hidden;
     background: var(--color-surface-2);
     transition: border-color var(--transition), box-shadow var(--transition);
@@ -395,7 +387,6 @@ h3 {
     flex-direction: column;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
     padding: var(--space-sm);
     gap: var(--space-sm);
     position: relative;
@@ -413,7 +404,6 @@ h3 {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: var(--radius-lg);
     background: linear-gradient(135deg, var(--color-accent-dim) 0%, transparent 60%);
     opacity: 0;
     transition: opacity var(--transition);
@@ -432,10 +422,9 @@ h3 {
 
 .card-thumbnail {
     width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-2);
+    height: auto;
+    object-fit: contain;
+    background: white;
     padding: var(--space-xs);
     transition: transform var(--transition);
 }
@@ -513,7 +502,6 @@ h3 {
     justify-content: center;
     min-width: 44px;
     min-height: 44px;
-    border-radius: var(--radius-sm);
     background: var(--color-surface-2);
     border: 1px solid var(--color-border);
     color: var(--color-text-muted);
@@ -565,7 +553,6 @@ h3 {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    border-radius: var(--radius-md);
     border: 1px solid var(--color-border);
     margin: var(--space-lg) 0;
 }
@@ -669,7 +656,6 @@ tfoot td {
     text-transform: uppercase;
     padding: 0.3rem 0.6rem;
     border: 1px solid rgba(0, 212, 255, 0.3);
-    border-radius: var(--radius-sm);
     white-space: nowrap;
     transition: background var(--transition), border-color var(--transition);
 }
@@ -686,7 +672,6 @@ tfoot td {
     color: var(--color-danger);
     min-width: 44px;
     min-height: 44px;
-    border-radius: var(--radius-sm);
     border: 1px solid transparent;
     transition: background var(--transition), border-color var(--transition);
 }
@@ -756,7 +741,6 @@ tfoot td {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 0.8rem var(--space-lg);
-    border-radius: var(--radius-md);
     white-space: nowrap;
     min-height: 44px;
     transition: opacity var(--transition), transform var(--transition);
@@ -823,7 +807,6 @@ tfoot td {
     width: 100%;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
     padding: var(--space-md);
 }
  
@@ -839,7 +822,6 @@ tfoot td {
     height: auto;
     max-height: 320px;
     object-fit: contain;
-    border-radius: var(--radius-sm);
 }
  
 @media (min-width: 768px) {
@@ -848,9 +830,106 @@ tfoot td {
     }
 }
 
+.quantity-cart {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+    flex-wrap: wrap;
+}
 
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
 
-/*Notification toast*/
+.quantity-selector:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-glow);
+}
+
+.qty-btn {
+    width: 42px;
+    height: 48px;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.qty-btn:hover {
+    background: var(--color-accent);
+    color: var(--color-primary);
+}
+
+.qty-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.qty-btn:disabled:hover {
+    background: transparent;
+    color: var(--color-text);
+}
+
+.quantity-selector input[type="number"] {
+    width: 52px;
+    height: 48px;
+    background: transparent;
+    border: none;
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+    outline: none;
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.quantity-selector input[type="number"]::-webkit-outer-spin-button,
+.quantity-selector input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.btn-add-to-cart {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.85rem var(--space-lg);
+    background: var(--color-accent);
+    color: var(--color-primary);
+    min-height: 48px;
+    white-space: nowrap;
+    transition: opacity var(--transition), transform var(--transition);
+}
+
+.btn-add-to-cart:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+.btn-add-to-cart svg {
+    flex-shrink: 0;
+}
+
 .cart-toast {
     position: fixed;
     bottom: 0;
@@ -877,7 +956,6 @@ tfoot td {
         left: auto;
         border-top: none;
         border: 1px solid var(--color-accent);
-        border-radius: var(--radius-md);
         max-width: 320px;
         text-align: left;
         box-shadow: var(--shadow-glow);
@@ -939,7 +1017,6 @@ tfoot td {
 .cart-modal {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     padding: var(--space-xl) var(--space-lg);
     text-align: center;
     box-shadow: var(--shadow-card);
@@ -973,7 +1050,6 @@ tfoot td {
     background: var(--color-accent);
     color: var(--color-primary);
     padding: 0.8rem;
-    border-radius: var(--radius-md);
     font-weight: 700;
     font-size: 0.95rem;
     letter-spacing: 0.05em;
@@ -993,7 +1069,6 @@ tfoot td {
     border: 1px solid var(--color-border);
     color: var(--color-text-muted);
     padding: 0.8rem;
-    border-radius: var(--radius-md);
     cursor: pointer;
     font-weight: 700;
     font-size: 0.95rem;
@@ -1042,7 +1117,6 @@ tfoot td {
     max-width: 420px;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
     padding: var(--space-xl) var(--space-lg);
     display: flex;
     flex-direction: column;
@@ -1106,7 +1180,6 @@ h2.auth-title {
 .form-control {
     background: var(--color-surface-2);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
     color: var(--color-text);
     font-size: 1rem;
     padding: 0.75rem var(--space-md);
@@ -1128,7 +1201,6 @@ h2.auth-title {
 .auth-error {
     background: rgba(255, 77, 109, 0.12);
     border: 1px solid rgba(255, 77, 109, 0.35);
-    border-radius: var(--radius-md);
     color: var(--color-danger);
     font-family: var(--font-display);
     font-size: 0.9rem;
@@ -1169,7 +1241,6 @@ h2.auth-title {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 0.8rem;
-    border-radius: var(--radius-md);
     background: var(--color-accent);
     color: var(--color-primary);
     border: none;
@@ -1284,7 +1355,6 @@ h2.auth-title {
     text-transform: uppercase;
     color: var(--color-text-muted);
     padding: 0.6rem var(--space-sm);
-    border-radius: var(--radius-sm);
     white-space: nowrap;
     min-height: 44px;
     transition: color var(--transition), background var(--transition);
@@ -1328,8 +1398,7 @@ h2.auth-title {
 }
 
 .admin-main h1::after {
-    left: 0;
-    transform: none;
+    display: none;
 }
 
 @media (min-width: 768px) {
@@ -1369,7 +1438,6 @@ h2.auth-title {
     justify-content: center;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
     padding: var(--space-xl) var(--space-lg);
     min-height: 120px;
     gap: var(--space-sm);
@@ -1426,21 +1494,12 @@ h2.auth-title {
     color: var(--color-accent);
 }
 
-/* ================================
-   ADMIN TABLE
-   ================================ */
-
 .admin-table {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
     overflow: hidden;
 }
-
-/* ================================
-   ADMIN BTNS
-   ================================ */
 
 .admin-btn {
     display: inline-flex;
@@ -1452,7 +1511,6 @@ h2.auth-title {
     letter-spacing: 0.05em;
     text-transform: uppercase;
     padding: 0.45rem 0.9rem;
-    border-radius: var(--radius-sm);
     border: 1px solid var(--color-accent);
     background: var(--color-accent);
     color: var(--color-primary);
@@ -1492,10 +1550,6 @@ h2.auth-title {
     opacity: 1;
 }
 
-/* ================================
-   ADMIN ACTIONS
-   ================================ */
-
 .admin-actions {
     display: flex;
     align-items: center;
@@ -1509,10 +1563,6 @@ h2.auth-title {
     display: inline;
 }
 
-/* ================================
-   ADMIN MAIN HEADER (titre + bouton New)
-   ================================ */
-
 .admin-main-header {
     display: flex;
     align-items: center;
@@ -1522,11 +1572,8 @@ h2.auth-title {
 
 .admin-main-header h1 {
     margin: 0;
+    display: block;
 }
-
-/* ================================
-   ADMIN STATUS BADGES
-   ================================ */
 
 .admin-status {
     display: inline-block;
@@ -1536,7 +1583,6 @@ h2.auth-title {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 0.25rem 0.65rem;
-    border-radius: var(--radius-sm);
     border: 1px solid transparent;
 }
 
@@ -1547,9 +1593,9 @@ h2.auth-title {
 }
 
 .admin-status-processing {
-    background: rgba(0, 214, 143, 0.08);
-    border-color: rgba(0, 214, 143, 0.25);
-    color: var(--color-success);
+    background: rgba(214, 210, 0, 0.08);
+    border-color: rgba(214, 210, 0, 0.25);
+    color: #eeff00ce;
 }
 
 .admin-status-cancelled {
@@ -1558,6 +1604,17 @@ h2.auth-title {
     color: var(--color-danger);
 }
 
+.admin-status-shipped {
+    background: rgba(138, 43, 226, 0.08);
+    border-color: rgba(138, 43, 226, 0.25);
+    color: #a855f7;
+}
+
+.admin-status-delivered {
+    background: rgba(0, 214, 143, 0.15);
+    border-color: rgba(0, 214, 143, 0.4);
+    color: var(--color-success);
+}
 /* ================================
    ADMIN EMPTY STATE
    ================================ */
@@ -1575,7 +1632,6 @@ h2.auth-title {
 
 .flash {
     padding: var(--space-sm) var(--space-md);
-    border-radius: var(--radius-md);
     margin-bottom: var(--space-md);
     font-family: var(--font-display);
     font-size: 0.9rem;
@@ -1602,7 +1658,6 @@ h2.auth-title {
 .admin-form .form-control {
     background: var(--color-surface-2);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
     color: var(--color-text);
     font-size: 1rem;
     padding: 0.75rem var(--space-md);
@@ -1630,7 +1685,6 @@ h2.auth-title {
     width: 72px;
     height: 72px;
     object-fit: cover;
-    border-radius: var(--radius-md);
     border: 1px solid var(--color-border);
     background: var(--color-surface-2);
     transition: transform var(--transition);
@@ -1648,7 +1702,6 @@ h2.auth-title {
     letter-spacing: 0.07em;
     text-transform: uppercase;
     padding: 0.2rem 0.55rem;
-    border-radius: var(--radius-sm);
     background: var(--color-accent-dim);
     border: 1px solid rgba(0, 212, 255, 0.2);
     color: var(--color-accent);
@@ -1693,7 +1746,6 @@ h2.auth-title {
 
 .admin-upload-zone {
     border: 2px dashed var(--color-border);
-    border-radius: var(--radius-md);
     padding: var(--space-lg);
     text-align: center;
     background: var(--color-surface-2);
@@ -1757,7 +1809,6 @@ h2.auth-title {
     padding: var(--space-md);
     background: var(--color-surface-2);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
     margin-bottom: var(--space-xs);
 }
 
@@ -1775,7 +1826,6 @@ h2.auth-title {
     width: 80px;
     height: 80px;
     object-fit: cover;
-    border-radius: var(--radius-sm);
     border: 1px solid var(--color-border);
     flex-shrink: 0;
 }
@@ -1785,10 +1835,6 @@ h2.auth-title {
     color: var(--color-text-muted);
     font-style: italic;
 }
-
-/* ================================
-   ADMIN FORM
-   ================================ */
 
 .admin-form select.form-control {
     appearance: none;

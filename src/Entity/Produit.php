@@ -6,6 +6,7 @@ use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
@@ -16,12 +17,16 @@ class Produit
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'The name cannot be empty.')]
+    #[Assert\Length(min: 2, max: 255, minMessage: 'Minimum 2 characters.', maxMessage: 'Maximum 255 characters.')]
     private ?string $designation = null;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
     #[ORM\Column(type: 'decimal', precision: 8, scale: 2)]
+    #[Assert\NotBlank(message: 'The price cannot be empty.')]
+    #[Assert\Positive(message: 'The price must be a positive number.')]
     private ?float $prix = null;
 
     /**
@@ -31,6 +36,8 @@ class Produit
     private Collection $favoris;
 
     #[ORM\Column(length: 500)]
+    #[Assert\NotBlank(message: 'The description cannot be empty.')]
+    #[Assert\Length(min: 5, max: 500, minMessage: 'Minimum 5 characters.', maxMessage: 'Maximum 500 characters.')]
     private ?string $description = null;
 
     /**

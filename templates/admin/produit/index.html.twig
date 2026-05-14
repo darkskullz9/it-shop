@@ -38,16 +38,20 @@
                 <td>{{ produit.category ? produit.category.designation : '—' }}</td>
                 <td>{{ produit.prix }} €</td>
 
-                <td class="admin-actions">
-                    <a href="{{ path('app_admin_produit_edit', { id: produit.id }) }}" class="admin-btn admin-btn-secondary">Edit</a>
+                <td>
+                    <div class="admin-actions">
+                        <a href="{{ path('app_admin_produit_edit', { id: produit.id }) }}" class="admin-btn admin-btn-secondary">
+                            Edit
+                        </a>
 
-                    <form 
-                        action="{{ path('app_admin_produit_delete', { id: produit.id }) }}" 
-                        method="POST"
-                        onsubmit="return confirm('Delete this product?')"
-                    >
-                        <button type="submit" class="admin-btn admin-btn-danger">Delete</button>
-                    </form>
+                        <form 
+                            action = "{{ path('app_admin_produit_delete', { id: produit.id }) }}" 
+                            method = "POST"
+                            onsubmit = "return confirm('Delete this product?')"
+                        >
+                            <button type="submit" class="admin-btn admin-btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             {% else %}

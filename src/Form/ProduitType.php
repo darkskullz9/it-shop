@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ProduitType extends AbstractType
 {
@@ -55,7 +56,12 @@ class ProduitType extends AbstractType
                     new Image([
                         'maxSize' => '2M',
                         'mimeTypesMessage' => 'Please, upload a valid picture (jpg, png, webp)',
-                    ])
+                    ]),
+
+                    new NotBlank([
+                        'message' => 'Please upload an image.',
+                        'groups'  => ['creation'],
+                    ]),
                 ],
             ])
         ;
@@ -65,6 +71,9 @@ class ProduitType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Produit::class,
+            'validation_groups' => ['Default'],
         ]);
+
+        $resolver->setAllowedTypes('validation_groups', ['array']);
     }
 }
