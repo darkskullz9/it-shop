@@ -28,25 +28,25 @@
 }
 
 :root {
-    --color-bg:           #0d1a14;
-    --color-surface:      #142b1e;
-    --color-surface-2:    #1c382b;
-    --color-border:       #2a5040;
-    --color-primary:      #1a2e27;
-    --color-accent:       #00ff73;
-    --color-accent-dim:   rgba(0, 255, 128, 0.12);
-    --color-text:         #e8f0ea;
-    --color-text-muted:   #8fcfac;
-    --color-white:        #ffffff;
-    --color-danger:       #ff4d6d;
-    --color-success:      #00d68f;
+    --color-bg: #0d1a14;
+    --color-surface: #142b1e;
+    --color-surface-2: #1c382b;
+    --color-border: #2a5040;
+    --color-primary: #1a2e27;
+    --color-accent: #00ff73;
+    --color-accent-dim: rgba(0, 255, 128, 0.12);
+    --color-text: #e8f0ea;
+    --color-text-muted: #8fcfac;
+    --color-white: #ffffff;
+    --color-danger: #ff4d6d;
+    --color-success: #00d68f;
 
-    --space-xs:  0.25rem; /* 4px */
-    --space-sm:  0.5rem;  /* 8px */
-    --space-md:  1rem;    /* 16px */
-    --space-lg:  1.5rem;  /* 24px */
-    --space-xl:  2rem;    /* 32px */
-    --space-2xl: 3rem;    /* 48px */
+    --space-xs: 0.25rem; /* 4px */
+    --space-sm: 0.5rem; /* 8px */
+    --space-md: 1rem; /* 16px */
+    --space-lg: 1.5rem; /* 24px */
+    --space-xl: 2rem; /* 32px */
+    --space-2xl: 3rem; /* 48px */
 
     --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
     --shadow-glow: 0 0 20px rgba(0, 255, 85, 0.15);
@@ -54,8 +54,8 @@
     --transition: 0.25s ease;
 
     --font-display: "Rajdhani", sans-serif;
-    --font-body:    sans-serif;
-    --font-brand:   "Neotrax", sans-serif;
+    --font-body: sans-serif;
+    --font-brand: "Neotrax", sans-serif;
 
     --nav-height: 60px;
 }
@@ -312,7 +312,7 @@ h3 {
 .cards-wrapper {
     width: 100%;
     padding: var(--space-lg) var(--space-md) var(--space-2xl);
-}    
+}
 
 .cards-grid {
     display: grid;
@@ -481,7 +481,6 @@ h3 {
     font-weight: 700;
     color: var(--color-accent);
 }
-
 
 .quantity-cart {
     display: flex;
@@ -1665,7 +1664,6 @@ h2.auth-title {
     .admin-cards-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
 }
 
 @media (max-width: 600px) {
@@ -1677,27 +1675,27 @@ h2.auth-title {
 @media (min-width: 768px) {
     h1 {
         font-size: 3rem;
-    }    
+    }
 
     h2 {
         font-size: 1.6rem;
-    }    
+    }
 
     h3 {
         font-size: 1.1rem;
-    }    
+    }
 
     .main-nav {
         padding: 0.9rem var(--space-xl);
-    }    
+    }
 
     .main-nav .logotype {
         font-size: 1.8rem;
-    }    
+    }
 
     .nav-toggle {
         display: none;
-    }    
+    }
 
     .navbar {
         display: flex;
@@ -1709,21 +1707,21 @@ h2.auth-title {
         gap: 0.5rem;
         flex-wrap: wrap;
         align-items: center;
-    }    
+    }
 
     .nav-link {
         width: auto;
         padding: 0.4rem 0.9rem;
         min-height: unset;
-    }    
+    }
 
     .search-container form {
         max-width: 540px;
-    }    
+    }
 
     .cards-wrapper {
         padding: var(--space-xl) var(--space-lg) var(--space-2xl);
-    }    
+    }
 
     .card {
         padding: var(--space-md);
@@ -1833,14 +1831,13 @@ h2.auth-title {
     .admin-card-label {
         font-size: 1.3rem;
     }
-
-}    
+}
 
 @media (min-width: 1024px) {
     h1 {
         font-size: 4rem;
-    }    
-    
+    }
+
     h1::after {
         width: 60px;
     }
@@ -1886,13 +1883,12 @@ h2.auth-title {
         max-width: 1400px;
         margin: 0 auto;
         padding: var(--space-xl) var(--space-xl) var(--space-2xl);
-    }    
+    }
 
     .cards-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
-
 
 /*.clickable-card {
     max-width: 1600px;
