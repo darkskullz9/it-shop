@@ -1,29 +1,3 @@
-const navToggle = document.querySelector('.nav-toggle');
-const navbar = document.querySelector('.navbar');
-
-if(navToggle && navbar) {
-    navToggle.addEventListener('click', () => {
-        const isOpen = navbar.classList.toggle('open');
-        navToggle.classList.toggle('is-open', isOpen);
-        navToggle.setAttribute('aria-expanded', isOpen);
-    });
-
-    navbar.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navbar.classList.remove('open');
-            navToggle.classList.remove('is-open');
-            navToggle.setAttribute('aria-expanded', 'false');
-        });
-    });
-
-    document.addEventListener('click', (e) => {
-        if(!navToggle.contains(e.target) && !navbar.contains(e.target)) {
-            navbar.classList.remove('open');
-            navToggle.classList.remove('is-open');
-            navToggle.setAttribute('aria-expanded', 'false');
-        }
-    });
-}
 
 function closeCartModal() {
     document.getElementById('cart-modal-overlay').style.display = 'none';
