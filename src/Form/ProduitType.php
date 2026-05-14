@@ -21,23 +21,30 @@ class ProduitType extends AbstractType
         $builder
             ->add('designation', TextType::class, [
                 'label' => 'Product name',
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Product name...'],
+                'label_attr' => ['class' => 'form-label'],
             ])
 
-            ->add('description', TextType::class, [
+            ->add('description', TextareaType::class, [
                 'label' => 'Description',
-                'attr' => ['rows' => 4],
+                'attr' => ['class' => 'form-control', 'rows' => 4, 'placeholder' => 'Description...'],
+                'label_attr' => ['class' => 'form-label'],
             ])
 
             ->add('prix', MoneyType::class, [
                 'label' => 'Price',
                 'currency' => 'EUR',
                 'html5' => false,
+                'attr' => ['class' => 'form-control'],
+                'label_attr' => ['class' => 'form-label'],
             ])
 
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'designation',
                 'placeholder' => 'Choose a category',
+                'attr' => ['class' => 'form-control'],
+                'label_attr' => ['class' => 'form-label'],
             ])
 
             ->add('imageFile', FileType::class, [

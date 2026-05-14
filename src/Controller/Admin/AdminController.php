@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
-
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Entity\Produit;
 use App\Entity\Category;
 use App\Entity\Order;

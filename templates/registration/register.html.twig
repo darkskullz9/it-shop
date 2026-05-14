@@ -3,17 +3,34 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class="auth-container">
+    <h1 class="auth-title">Register</h1>
 
-    {{ form_errors(registrationForm) }}
+    {{ form_start(registrationForm, { attr: { class: 'auth-form' } }) }}
+        {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
+        {{ form_row(registrationForm.email, {
+            row_attr:   { class: 'form-group' },
+            label_attr: { class: 'form-label' },
+            attr:       { class: 'form-control', placeholder: 'your@email.com' }
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password',
+            row_attr:   { class: 'form-group' },
+            label_attr: { class: 'form-label' },
+            attr:       { class: 'form-control', placeholder: '••••••••' }
+        }) }}
+
+        {{ form_row(registrationForm.agreeTerms, {
+            row_attr: { class: 'auth-remember' }
+        }) }}
+
+        <button type="submit" class="auth-btn">Register</button>
+
+        <p class="auth-switch">
+            Already have an account? <a href="{{ path('app_login') }}">Sign in</a>
+        </p>
     {{ form_end(registrationForm) }}
+</div>
 {% endblock %}

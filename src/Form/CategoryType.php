@@ -14,7 +14,14 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('designation', TextType::class, [
-                'label' => 'Category name',
+                'label' => 'Name',
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'Category name...',
+                ],
+                'label_attr' => [
+                    'class' => 'form-label',
+                ],
             ])
         ;
     }

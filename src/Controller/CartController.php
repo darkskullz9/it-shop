@@ -37,6 +37,8 @@ final class CartController extends AbstractController
         $produit = $produitRepository->find($id);
         $user = $this->getUser();
 
+        $quantity = max(1, (int) $request->query->get('quantity', 1));
+
         $cart = $cartRepository->findOneBy(['user' => $user]);
         if(!$cart) {
             $cart = new Cart();
@@ -46,12 +48,12 @@ final class CartController extends AbstractController
 
         $add = $addRepository->findOneBy(['cart' => $cart, 'product' => $produit]);
         if($add) {
-            $add->setQuantity($add->getQuantity() + 1);
+            $add->setQuantity($add->getQuantity() + $quantity);
         } else {
             $add = new Add();
             $add->setCart($cart);
             $add->setProduct($produit);
-            $add->setQuantity(1);
+            $add->setQuantity($quantity);
             $em->persist($add);
         }
 
