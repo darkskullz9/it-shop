@@ -1317,13 +1317,6 @@ h2.auth-title {
     border-color: var(--color-accent);
 }
 
-.admin-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-sm);
-}
-
 .admin-actions form {
     margin: 0;
     padding: 0;
@@ -1337,6 +1330,7 @@ h2.auth-title {
 .admin-actions-desktop {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-sm);
 }
 
