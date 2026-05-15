@@ -316,7 +316,7 @@ h3 {
 
 .cards-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--space-md);
     list-style: none;
 }
@@ -598,6 +598,8 @@ h3 {
     align-items: stretch;
     width: 100%;
     padding: var(--space-lg) var(--space-md);
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .order-table,
@@ -609,6 +611,12 @@ h3 {
     border: 1px solid var(--color-border);
     margin: var(--space-lg) 0;
 }
+
+.order-table col:first-child,
+.cart-table col:first-child {
+    width: 2rem;
+}
+
 
 table {
     width: 100%;
@@ -814,7 +822,7 @@ tfoot td {
     transform: translateY(100%);
     animation:
         slideUp 0.3s ease forwards,
-        fadeOutDown 0.4s ease 2.5s forwards;
+        fadeOutDown 0.4s ease 1.2s forwards;
     text-align: center;
 }
 
@@ -828,7 +836,7 @@ tfoot td {
     justify-content: center;
     z-index: 999;
     opacity: 0;
-    animation: fadeInOverlay 0.3s ease 2.7s forwards;
+    animation: fadeInOverlay 0.3s ease 1.4s forwards;
 }
 
 .cart-modal {
@@ -1713,8 +1721,8 @@ h2.auth-title {
         min-height: unset;
     }
 
-    .search-container form {
-        max-width: 540px;
+    .search-container {
+        padding: 0 var(--space-xl);
     }
 
     .cards-wrapper {
@@ -1726,7 +1734,7 @@ h2.auth-title {
     }
 
     .card-thumbnail {
-        height: 220px;
+        height: auto;
     }
 
     .product-designation {
@@ -1738,7 +1746,7 @@ h2.auth-title {
     }
 
     .main-container {
-        padding: 0 var(--space-xl) var(--space-2xl);
+        padding: var(--space-xl) var(--space-xl) var(--space-2xl);
     }
 
     .order-table,
@@ -1836,15 +1844,19 @@ h2.auth-title {
         width: 60px;
     }
 
+    .main-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+    }
+
     .cards-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: var(--space-lg);
     }
 
-    .main-container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 0 var(--space-lg) var(--space-2xl);
+    .card-thumbnail {
+        height: auto;
     }
 
     .admin-container {
@@ -1881,6 +1893,10 @@ h2.auth-title {
 
     .cards-grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card-thumbnail {
+        height: auto;
     }
 }
 
