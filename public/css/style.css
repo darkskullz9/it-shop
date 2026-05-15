@@ -1299,6 +1299,25 @@ h2.auth-title {
     opacity: 1;
 }
 
+.admin-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.admin-menu-btn:hover {
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    border-color: var(--color-accent);
+}
+
 .admin-actions {
     display: flex;
     align-items: center;
@@ -1310,6 +1329,71 @@ h2.auth-title {
     margin: 0;
     padding: 0;
     display: inline;
+}
+
+.admin-actions-mobile {
+    display: none;
+}
+
+.admin-actions-desktop {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.admin-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    z-index: 50;
+    min-width: 140px;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-dropdown[hidden] {
+    display: none;
+}
+
+.admin-dropdown-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.7rem var(--space-md);
+    min-height: 44px;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--color-text-muted);
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.admin-dropdown-item:hover {
+    background: var(--color-accent-dim);
+    color: var(--color-accent);
+}
+
+.admin-dropdown-danger { 
+    color: var(--color-danger); 
+}
+
+.admin-dropdown-danger:hover {
+    background: rgba(255, 77, 109, 0.12);
+    color: var(--color-danger);
+}
+
+.admin-dropdown form { 
+    margin: 0; 
 }
 
 /* Status badges */
@@ -1675,6 +1759,16 @@ h2.auth-title {
 @media (min-width: 600px) {
     .admin-form-row {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 767px) {
+    .col-img { display: none; }
+    .admin-actions-desktop { display: none; }
+    .admin-actions-mobile {
+        display: flex;
+        position: relative;
+        justify-content: center;
     }
 }
 
