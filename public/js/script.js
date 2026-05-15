@@ -74,6 +74,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function closeAllDropdowns() {
+    document.querySelectorAll('.admin-dropdown').forEach(d => {
+        d.hidden = true;
+        const id = d.id.replace('dropdown-', '');
+        const btn = document.querySelector('[data-id="' + id + '"]');
+        if(btn && d.parentElement === document.body) {
+            btn.closest('.admin-actions-mobile').appendChild(d);
+        }
+
+        d.style.position = '';
+        d.style.top = '';
+        d.style.right = '';
+        d.style.left = '';
+    });
+    document.querySelectorAll('.admin-menu-btn').forEach(b => {
+        b.setAttribute('aria-expanded', 'false');
+    });
+}
+
 document.querySelectorAll('.admin-menu-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -82,23 +101,21 @@ document.querySelectorAll('.admin-menu-btn').forEach(btn => {
         const dropdown = document.getElementById('dropdown-' + id);
         const isOpen = !dropdown.hidden;
 
-        document.querySelectorAll('.admin-dropdown').forEach(d => {
-            d.hidden = true;
-        });
-        document.querySelectorAll('.admin-menu-btn').forEach(b => {
-            b.setAttribute('aria-expanded', 'false');
-        });
+        closeAllDropdowns();
 
-        if (!isOpen) {
+        if(!isOpen) {
+            const rect = this.getBoundingClientRect();
+            
+            document.body.appendChild(dropdown);
+            dropdown.style.position = 'fixed';
+            dropdown.style.top = (rect.bottom + 4) + 'px';
+            dropdown.style.right = (window.innerWidth - rect.right) + 'px';
+            dropdown.style.left = 'auto';
             dropdown.hidden = false;
             this.setAttribute('aria-expanded', 'true');
         }
     });
 });
 
-document.addEventListener('click', () => {
-    document.querySelectorAll('.admin-dropdown').forEach(d => { d.hidden = true; });
-    document.querySelectorAll('.admin-menu-btn').forEach(b => {
-        b.setAttribute('aria-expanded', 'false');
-    });
-});
+document.addEventListener('click', closeAllDropdowns);
+window.addEventListener('scroll', closeAllDropdowns, true);
