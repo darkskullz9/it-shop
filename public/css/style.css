@@ -256,7 +256,7 @@ h3 {
 
 .search-container form {
     display: flex;
-    width: 100%;
+    width: 480px;
     border: 1px solid var(--color-border);
     overflow: hidden;
     background: var(--color-surface-2);
@@ -1731,6 +1731,10 @@ h2.auth-title {
         flex-wrap: wrap;
     }
 
+    .search-container form {
+        width: 100%;
+    }
+
     .action-btn {
         width: auto;
     }
@@ -1810,6 +1814,10 @@ h2.auth-title {
 
     .search-container {
         padding: 0 var(--space-xl);
+    }
+
+    .search-container form {
+            width: 100%;
     }
 
     .cards-wrapper {
@@ -1937,6 +1945,10 @@ h2.auth-title {
         padding: var(--space-xl) var(--space-lg) var(--space-2xl);
     }
 
+    .search-container form {
+            width: 480px;
+    }
+
     .cards-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: var(--space-lg);
@@ -1972,6 +1984,10 @@ h2.auth-title {
 }
 
 @media (min-width: 1280px) {
+    .search-container form {
+            width: 480px;
+    }
+
     .cards-wrapper {
         max-width: 1400px;
         margin: 0 auto;
