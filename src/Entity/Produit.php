@@ -38,7 +38,7 @@ class Produit
     #[ORM\Column(length: 500)]
     #[Assert\NotBlank(message: 'The description cannot be empty.')]
     #[Assert\Length(min: 5, max: 500, minMessage: 'Minimum 5 characters.', maxMessage: 'Maximum 500 characters.')]
-    private ?string $description = null;
+    private ?string $description;
 
     /**
      * @var Collection<int, Add>
