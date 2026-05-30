@@ -19,6 +19,9 @@ final class OrderController extends AbstractController
 {
     #[Route('/create', name: 'app_order_create')]
     public function create(CartRepository $cartRepository, EntityManagerInterface $em): Response {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        /** @var \App\Entity\User $user */
         $user = $this->getUser();
         $cart = $cartRepository->findOneBy(['user'=>$user]);
 
@@ -31,15 +34,39 @@ final class OrderController extends AbstractController
         $order->setUser($user);
         $order->setDateOrder(new \DateTime());
         $order->setStatus('pending');
-        $em->persist($order);
+
+        $total = '0.00';
 
         foreach($cart->getAdds() as $add) {
+            $product = $add->getProduct();
+            $quantity = $add->getQuantity();
+
+            if(!$product) {
+                $this->addFlash('error', 'A product in your cart is no longer available.');
+                return $this->redirectToRoute('app_cart');
+            }
+
+            if($product->getStock() < $quantity) {
+                $this->addFlash('error', sprintf('Not enough stock for product "%s".', $product->getDesignation()));
+                return $this->redirectToRoute('app_cart');
+            }
+
             $orderItem = new OrderItem();
             $orderItem->setProduit($add->getProduct());
             $orderItem->setQuantity($add->getQuantity());
+            $orderItem->setUnitPrice((string) $product->getPrix());
             $orderItem->setOrderRef($order);
+
+            $lineTotal = bcmul((string) $product->getPrix(), (string) $quantity, 2);
+            $total = bcadd($total, $lineTotal, 2);
+
+            $product->setStock($product->getStock() - $quantity);
+
             $em->persist($orderItem);
         }
+
+        $order->setTotal($total);
+        $em->persist($order);
 
         foreach($cart->getAdds() as $add) {
             $em->remove($add);
