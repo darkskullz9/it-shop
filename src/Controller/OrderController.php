@@ -20,7 +20,6 @@ final class OrderController extends AbstractController
 {
     #[Route('/create', name: 'app_order_create')]
     public function create(CartRepository $cartRepository, EntityManagerInterface $em): Response {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
@@ -35,6 +34,9 @@ final class OrderController extends AbstractController
         $order->setUser($user);
         $order->setDateOrder(new \DateTime());
         $order->setStatus('pending');
+        $order->setTotal('0.00');
+
+        $em->persist($order);
 
         $total = '0.00';
 
@@ -52,13 +54,15 @@ final class OrderController extends AbstractController
                 return $this->redirectToRoute('app_cart');
             }
 
+            $unitPrice = (string) $product->getPrix();
+
             $orderItem = new OrderItem();
-            $orderItem->setProduit($add->getProduct());
-            $orderItem->setQuantity($add->getQuantity());
-            $orderItem->setUnitPrice((string) $product->getPrix());
+            $orderItem->setProduit($product);
+            $orderItem->setQuantity($quantity);
+            $orderItem->setUnitPrice($unitPrice);
             $orderItem->setOrderRef($order);
 
-            $lineTotal = bcmul((string) $product->getPrix(), (string) $quantity, 2);
+            $lineTotal = bcmul($unitPrice, (string) $quantity, 2);
             $total = bcadd($total, $lineTotal, 2);
 
             $product->setStock($product->getStock() - $quantity);
