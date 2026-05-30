@@ -27,7 +27,7 @@ class Produit
     #[ORM\Column(type: 'decimal', precision: 8, scale: 2)]
     #[Assert\NotBlank(message: 'The price cannot be empty.')]
     #[Assert\Positive(message: 'The price must be a positive number.')]
-    private ?float $prix = null;
+    private ?string $prix = null;
 
     /**
      * @var Collection<int, User>
@@ -39,6 +39,12 @@ class Produit
     #[Assert\NotBlank(message: 'The description cannot be empty.')]
     #[Assert\Length(min: 5, max: 500, minMessage: 'Minimum 5 characters.', maxMessage: 'Maximum 500 characters.')]
     private ?string $description = null;
+
+    #[ORM\Column(options: ['default' => 0])]
+    #[Assert\PositiveOrZero(message: 'The stock must be a positive number or zero.')]
+    private ?int $stock = 0;
+
+
 
     /**
      * @var Collection<int, Add>
@@ -91,15 +97,27 @@ class Produit
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getPrix(): ?string
     {
         return $this->prix;
     }
 
-    public function setPrix(float $prix): static
+    public function setPrix(string $prix): static
     {
         $this->prix = $prix;
 
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(int $stock): static
+    {
+        $this->stock = max(0, $stock);
+        
         return $this;
     }
 
