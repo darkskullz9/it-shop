@@ -16,6 +16,26 @@ class OrderItem
     #[ORM\Column]
     private ?int $quantity = null;
 
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    private ?string $unitPrice = null;
+
+    public function getUnitPrice(): ?string
+    {
+        return $this->unitPrice;
+    }
+
+    public function setUnitPrice(string $unitPrice): static
+    {
+        $this->unitPrice = $unitPrice;
+
+        return $this;
+    }
+
+    public function getSubtotal(): string
+    {
+        return bcmul($this->unitPrice, (string)$this->quantity, 2);
+    }
+
     #[ORM\ManyToOne(inversedBy: 'orderItems')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Order $orderRef = null;
