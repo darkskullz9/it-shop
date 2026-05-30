@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 
 use App\Entity\Cart;
 use App\Entity\Add;
@@ -85,7 +87,7 @@ final class CartController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         if($add->getCart()?->getUser() !== $this->getUser()) {
-            throw $this->createAccessDeniedException('You do not have permission to remove this item.');
+            throw new AccessDeniedException('You do not have permission to remove this item.');
         }
 
         $em->remove($add);
