@@ -30,14 +30,28 @@ final class CartController extends AbstractController
     }
 
     #[Route('/add/{id}', name: 'app_cart_add')]
-    public function add(int $id, Request $request, ProduitRepository $produitRepository, CartRepository $cartRepository, AddRepository $addRepository, EntityManagerInterface $em): Response
+    public function add(
+        int $id, Request $request, ProduitRepository $produitRepository, CartRepository $cartRepository, AddRepository $addRepository, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $produit = $produitRepository->find($id);
+
+        if(!$produit) {
+            throw $this->createNotFoundException('Product not found');
+        }
+
+        if($produit->getStock() <= 0) {
+            $this->addFlash('error', 'This product is out of stock.');
+            return $this->redirectToRoute('app_home');
+        }
+
+        /** @var \App\Entity\User $user */
         $user = $this->getUser();
 
-        $quantity = max(1, (int) $request->query->get('quantity', 1));
+        $quantity = (int) $request->query->get('quantity', 1);
+        $quantity = max(1, $quantity);
+        $quantity = min($quantity, $produit->getStock());
 
         $cart = $cartRepository->findOneBy(['user' => $user]);
         if(!$cart) {
@@ -48,7 +62,8 @@ final class CartController extends AbstractController
 
         $add = $addRepository->findOneBy(['cart' => $cart, 'product' => $produit]);
         if($add) {
-            $add->setQuantity($add->getQuantity() + $quantity);
+            $newQuantity = min($add->getQuantity() + $quantity, $produit->getStock());
+            $add->setQuantity($newQuantity);
         } else {
             $add = new Add();
             $add->setCart($cart);
@@ -61,17 +76,17 @@ final class CartController extends AbstractController
         $this->addFlash('cart_added', $produit->getDesignation());
 
         $referer = $request->headers->get('referer');
-        if($referer) {
-            return $this->redirect($referer);
-        }
-
-        return $this->redirectToRoute('app_home');
+        return $this->redirect($referer ?: $this->generateUrl('app_home'));
     }
 
     #[Route('/remove/{id}', name: 'app_cart_remove')]
     public function remove(Add $add, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        if($add->getCart()?->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You do not have permission to remove this item.');
+        }
 
         $em->remove($add);
         $em->flush();
