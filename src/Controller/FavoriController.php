@@ -19,6 +19,10 @@ final class FavoriController extends AbstractController
         $referer = $request->headers->get('referer');
         $u = $this->getUser();
 
+        if (!$u instanceof \App\Entity\User) {
+            throw $this->createAccessDeniedException();
+        }
+
         if($u->getProduits()->contains($produit)) {
             $u->removeProduit($produit);
         } else {
@@ -34,8 +38,14 @@ final class FavoriController extends AbstractController
     #[Route('/private-liste-favoris', name: 'app_liste_favoris')]
     public function listeFavoris(): Response {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $u = $this->getUser();
+
+        if (!$u instanceof \App\Entity\User) {
+            throw $this->createAccessDeniedException();
+        }
         
-        $favoris = $this->getUser()->getProduits();
+        $favoris = $u->getProduits();
 
         return $this->render('favori/liste-favoris.html.twig', [
             'favoris' => $favoris,
