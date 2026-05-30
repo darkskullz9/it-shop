@@ -6,7 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use App\Entity\Order;
 use App\Entity\OrderItem;
@@ -97,7 +98,7 @@ final class OrderController extends AbstractController
     #[Route('/{id}', name: 'app_order_show')]
     public function show(Order $order): Response {
         if($order->getUser() !== $this->getUser()) {
-            throw $this->createAccessDeniedException();
+            throw new AccessDeniedException();
         }
 
         return $this->render('order/show.html.twig', [

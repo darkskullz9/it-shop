@@ -7,8 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use App\Entity\Cart;
 use App\Entity\Add;
