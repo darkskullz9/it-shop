@@ -107,4 +107,19 @@ class Order
 
         return $this;
     }
+
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+    private ?string $total = '0.00';
+
+    public function getTotal(): ?string
+    {
+        return $this->total;
+    }
+
+    public function setTotal(string $total): static
+    {
+        $this->total = $total;
+
+        return $this;
+    }
 }
