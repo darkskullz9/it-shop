@@ -14,6 +14,8 @@ final class FavoriController extends AbstractController
 {
     #[Route('/private-favori/{id}', name: 'app_favori')]
     public function toggle(Produit $produit, EntityManagerInterface $em, Request $request): Response {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $referer = $request->headers->get('referer');
         $u = $this->getUser();
 
@@ -31,6 +33,8 @@ final class FavoriController extends AbstractController
 
     #[Route('/private-liste-favoris', name: 'app_liste_favoris')]
     public function listeFavoris(): Response {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
         $favoris = $this->getUser()->getProduits();
 
         return $this->render('favori/liste-favoris.html.twig', [
