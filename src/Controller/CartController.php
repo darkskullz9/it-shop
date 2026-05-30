@@ -80,7 +80,7 @@ final class CartController extends AbstractController
         return $this->redirect($referer ?: $this->generateUrl('app_home'));
     }
 
-    #[Route('/remove/{id}', name: 'app_cart_remove')]
+    #[Route('/remove/{id}', name: 'app_cart_remove', methods: ['POST'])]
     public function remove(Add $add, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -95,7 +95,7 @@ final class CartController extends AbstractController
         return $this->redirectToRoute('app_cart');
     }
 
-    #[Route('/empty', name: 'app_cart_clear')]
+    #[Route('/empty', name: 'app_cart_clear', methods: ['POST'])]
     public function empty(CartRepository $cartRepository, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
