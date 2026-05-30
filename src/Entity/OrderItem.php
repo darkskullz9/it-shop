@@ -33,6 +33,10 @@ class OrderItem
 
     public function getSubtotal(): string
     {
+        if($this->unitPrice === null || $this->quantity === null) {
+            return '0.00';
+        }
+
         return bcmul($this->unitPrice, (string)$this->quantity, 2);
     }
 

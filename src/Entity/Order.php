@@ -122,4 +122,15 @@ class Order
 
         return $this;
     }
+
+    public function recalculateTotal(): void
+    {
+        $total = '0.00';
+
+        foreach ($this->orderItems as $orderItem) {
+            $total = bcadd($total, $orderItem->getSubtotal(), 2);
+        }
+
+        $this->total = $total;
+    }
 }
