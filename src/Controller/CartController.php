@@ -81,12 +81,16 @@ final class CartController extends AbstractController
     }
 
     #[Route('/remove/{id}', name: 'app_cart_remove', methods: ['POST'])]
-    public function remove(Add $add, EntityManagerInterface $em): Response
+    public function remove(Add $add, Request $request, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         if($add->getCart()?->getUser() !== $this->getUser()) {
             throw new AccessDeniedException('You do not have permission to remove this item.');
+        }
+
+        if (!$this->isCsrfTokenValid('remove-item-' . $add->getId(), $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException('Invalid CSRF token.');
         }
 
         $em->remove($add);
@@ -96,9 +100,13 @@ final class CartController extends AbstractController
     }
 
     #[Route('/empty', name: 'app_cart_clear', methods: ['POST'])]
-    public function empty(CartRepository $cartRepository, EntityManagerInterface $em): Response
+    public function empty(CartRepository $cartRepository, Request $request, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        if (!$this->isCsrfTokenValid('clear-cart', $request->request->get('_token'))) {
+            throw $this->createAccessDeniedException('Invalid CSRF token.');
+        }
 
         $cart = $cartRepository->findOneBy(['user' => $this->getUser()]);
         if($cart) {
