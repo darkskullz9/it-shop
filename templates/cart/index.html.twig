@@ -29,7 +29,8 @@
                     <td>{{ add.quantity }}</td>
                     <td>{{ (add.quantity * add.product.prix) | number_format(2, ',', ' ')}} €</td>
                     <td>
-                        <form>
+                        <form methods="post" action="{{ path('app_cart_remove', {'id': add.id}) }}" style="display:inline;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('remove' ~ add.id) }}">
                             <button type="submit"  class="remove-btn">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -58,13 +59,12 @@
         <p>Total : {{ total|number_format(2, ',', ' ') }} €</p>
         
         <div class="cart-btn-container">
-            <button class="action-btn">
-                <a href="{{ path('app_cart_clear') }}">Empty the cart</a>
-            </button>
+            <form methods="post" action="{{ path('app_cart_clear') }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('clear-cart') }}">
+                <button type="submit" class="action-btn">Empty the cart</button>
+            </form>
 
-            <button class="action-btn">
-                <a href="{{ path('app_order_create') }}">Place order</a>
-            </button>
+            <a href="{{ path('app_order_create') }}" class="action-btn">Place order</a>
         </div>
     {% endif %}
 </div>
