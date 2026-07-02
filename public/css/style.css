@@ -1497,6 +1497,14 @@ h2.auth-title {
     color: var(--color-success);
 }
 
+.flash-error {
+    border: 1px solid #ff4d4d;
+    background: rgba(255, 77, 77, 0.12);
+    color: #ffb3b3;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
 .admin-form {
     display: flex;
     flex-direction: column;

@@ -33,6 +33,12 @@
                         Orders
                     </a>
                 </li>
+                <li>
+                    <a href="{{ path('app_admin_users') }}"
+                    class="admin-nav-link {{ app.request.attributes.get('_route') starts with 'app_admin_user' ? 'active' : '' }}">
+                        Users
+                    </a>
+                </li>
             </ul>
         </nav>
     </aside>
